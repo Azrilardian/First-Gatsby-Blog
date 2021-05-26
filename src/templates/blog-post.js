@@ -1,23 +1,26 @@
 import * as React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
+
+import Layout from "../components/layout"
+import Seo from "../components/seo"
 
 const Template = ({ data }) => {
-  // const {
-  //   frontmatter: { date, title, author },
-  //   html,
-  // } = data.markdownRemark
-  const post = data.markdownRemark
+  const {
+    frontmatter: { date, title, author },
+    html,
+  } = data.markdownRemark
 
   return (
-    <div>
-      <Link to="/blog">Go Back</Link>
+    <Layout>
+      <Seo title="detail-blog" />
+      <Link to="/blogs">Go Back</Link>
       <hr />
-      <h1>{post.frontmatter.title}</h1>
+      <h1>{title}</h1>
       <p>
-        Post by {post.frontmatter.author} on {post.frontmatter.date}
+        Post by {author} on {date}
       </p>
-      <div dangerouslySetInnerHTML={{ __html: post.html }} />
-    </div>
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+    </Layout>
   )
 }
 
